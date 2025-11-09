@@ -2,3 +2,4 @@ tensorflow
 fastapi
 uvicorn 
 numpy
+pandas
