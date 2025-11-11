@@ -1,0 +1,16 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environments
+myenv/
+
+
+# Ignore git and IDE files
+.git/
+.gitignore
+.idea/
+.vscode/
+*.log
+Music_Genre_Classification_Training_with_crnn (1).ipynb
