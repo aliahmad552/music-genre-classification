@@ -50,9 +50,8 @@ We trained multiple deep learning models:
 
 ---
 
-### Accuracy(97%) and Loss
-![App Screenshot](images/ouput.png)
-
+### Accuracy (97%) and Loss
+![App Screenshot](images/output.png)
 
 ## Saving the Model
 
