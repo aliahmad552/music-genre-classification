@@ -53,6 +53,9 @@ We trained multiple deep learning models:
 ### Accuracy (97%) and Loss
 ![App Screenshot](images/output.png)
 
+### Confusion Matrix
+![App](images/output2.png)
+
 ## Saving the Model
 
 The best performing CNN model was saved as:
