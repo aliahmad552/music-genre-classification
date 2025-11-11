@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🎵 Music Genre Classifier</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎧 Music Genre Classification</h1>
+        <p>Upload a short music clip to predict its genre!</p>
+
+        <form id="uploadForm">
+            <input type="file" id="audioFile" name="audio_data" accept="audio/*" required>
+            <button type="submit">Predict Genre</button>
+        </form>
+
+        <!-- Loading animation -->
+        <div id="loading" class="loading" style="display:none;">
+            <div class="spinner"></div>
+            <p>Predicting... Please wait 🎶</p>
+        </div>
+
+        <div id="result" class="result-box" style="display:none;">
+            <h2>Prediction Result</h2>
+            <p><strong>Genre:</strong> <span id="genre"></span></p>
+            <p><strong>Confidence:</strong> <span id="confidence"></span>%</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const resultBox = document.getElementById('result');
+        const genreEl = document.getElementById('genre');
+        const confidenceEl = document.getElementById('confidence');
+        const loading = document.getElementById('loading');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('audioFile');
+            if (!fileInput.files.length) {
+                alert("Please select an audio file first!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('audio_data', fileInput.files[0]);
+
+            // Hide previous result & show loading animation
+            resultBox.style.display = 'none';
+            loading.style.display = 'block';
+
+            try {
+                const response = await fetch('/predict_genre/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                genreEl.textContent = data.predicted_genre;
+                confidenceEl.textContent = data.confidence;
+
+                // Hide loading and show result
+                loading.style.display = 'none';
+                resultBox.style.display = 'block';
+            } catch (error) {
+                loading.style.display = 'none';
+                alert('Error predicting genre. Please try again.');
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
