@@ -54,3 +54,85 @@ We trained multiple deep learning models:
 
 The best performing CNN model was saved as:
 
+```bash
+model.save('model.keras')
+```
+
+This saved model can be loaded directly in Python using:
+
+```bash
+import tensorflow as tf
+model = tf.keras.models.load_model('model_music.keras')
+```
+## Blog Post
+
+A detailed step-by-step blog explaining the project, preprocessing, experiments, and deployment was published on Medium:
+
+[Read the Medium Blog](https://medium.com/@frextarr.552/music-genre-classification-using-cnn-and-crnn-on-gtzan-dataset-2d6607a35c15)
+
+
+## FastAPI Deployment
+
+We built a FastAPI backend for model inference:
+
+- Accepts audio uploads via /predict_genre/
+
+- Returns predicted genre with confidence scores
+
+- Integrated with HTML frontend for user interaction
+
+```bash
+uvicorn app:app --reload
+```
+
+## Frontend
+
+Simple HTML + CSS + JavaScript interface
+
+- Allows users to upload audio files and see predictions instantly
+
+- Responsive and lightweight
+
+## Docker Image
+
+To simplify deployment, a Docker image was created:
+
+```bash
+FROM python:3.10.11-slim
+
+WORKDIR /app
+
+# Add required system packages
+RUN apt-get update && apt-get install -y libsndfile1 ffmpeg && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir --default-timeout=200 tensorflow==2.20.0
+RUN pip install --no-cache-dir --default-timeout=200 -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+## Project Highlights
+
+- End-to-end deep learning pipeline for music genre classification
+
+- Model versioning & tracking with MLflow (optional)
+
+- Dataset & model versioning with DVC (optional)
+
+- FastAPI + Docker deployment
+
+- Fully documented on Medium for readers and learners
+
+## Future Work
+
+- Deploy model on cloud platforms (Render, Hugging Face Spaces, etc.)
+
+- Experiment with larger datasets and more genres
+
+- Add real-time streaming audio classification
