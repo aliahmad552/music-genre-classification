@@ -50,6 +50,10 @@ We trained multiple deep learning models:
 
 ---
 
+### Accuracy(97%) and Loss
+![App Screenshot](images/ouput.png)
+
+
 ## Saving the Model
 
 The best performing CNN model was saved as:
