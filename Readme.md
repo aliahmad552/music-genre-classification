@@ -56,6 +56,9 @@ We trained multiple deep learning models:
 ### Confusion Matrix
 ![App](images/output2.png)
 
+### Prediction on sample test data
+![sample](images/output3.png)
+
 ## Saving the Model
 
 The best performing CNN model was saved as:
