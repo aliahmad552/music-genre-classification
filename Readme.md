@@ -139,6 +139,7 @@ CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
 - Fully documented on Medium for readers and learners
 
 ## Future Work
+- CICD Pipeline
 
 - Deploy model on cloud platforms (Render, Hugging Face Spaces, etc.)
 
